@@ -10,6 +10,27 @@ npm run dev
 Then open http://localhost:3000. `npm run build` produces the static output, `npm run typecheck`
 runs TypeScript with no emit.
 
+## Deploying to GitHub Pages
+
+The site is a static export (`output: 'export'` in `next.config.mjs`), and
+`.github/workflows/deploy.yml` builds and publishes it on every push to `main`.
+
+One-time setup in the repository: **Settings → Pages → Source → GitHub Actions**.
+That is all — no branch to pick, no `gh-pages` to maintain.
+
+The base path is worked out at build time, so the repo name decides the URL:
+
+| Repo name | URL | Base path |
+| --- | --- | --- |
+| `teaksty.github.io` | `https://teaksty.github.io` | none |
+| anything else, e.g. `portfolio` | `https://teaksty.github.io/portfolio` | `/portfolio` |
+
+`actions/configure-pages` reports the right value and the workflow passes it in as
+`PAGES_BASE_PATH`. Locally the variable is unset, so `npm run dev` stays at the root.
+
+After the first deploy, point `site.url` in `data/site.ts` at the published address — it
+feeds `og:url` and the canonical tag.
+
 ## Where the content lives
 
 Nothing is written inside components. Two files hold everything:
