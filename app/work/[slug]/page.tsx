@@ -84,17 +84,18 @@ export default async function CaseStudyPage({ params }: Params) {
           style={{ ['--fade-delay' as string]: '260ms' }}
         >
           <p className="text-lead text-muted">{project.kind}</p>
-          {project.live ? (
+          {project.links?.map((link) => (
             <a
-              href={project.live.href}
+              key={link.href}
+              href={link.href}
               target="_blank"
               rel="noreferrer"
               data-cursor="Visit"
               className="link-underline font-mono text-micro text-fg transition-colors hover:text-accent"
             >
-              {project.live.label} ↗
+              {link.label} ↗
             </a>
-          ) : null}
+          ))}
         </div>
 
         <div className="grid-12 mt-[clamp(3rem,7vw,5rem)] gap-y-8">

@@ -35,8 +35,8 @@ export interface Project {
   client: string;
   roles: string[];
   stack: string[];
-  /** Optional live address, shown as a link in the case masthead. */
-  live?: { label: string; href: string };
+  /** Live product, source, downloads — rendered as links in the case masthead. */
+  links?: { label: string; href: string }[];
   /** One or two sentences. Anything longer belongs in the case study. */
   summary: string;
   layout: ProjectLayout;
@@ -66,7 +66,11 @@ export const projects: Project[] = [
     client: 'Own product',
     roles: ['Product', 'Development', 'Release'],
     stack: ['Python', 'pywebview', 'React', 'Nuitka', 'Cloudflare Workers'],
-    live: { label: 'corebots.org', href: 'https://corebots.org' },
+    links: [
+      { label: 'corebots.org', href: 'https://corebots.org' },
+      // Release assets, not source — labelled for what it actually is.
+      { label: 'Releases', href: 'https://github.com/teaksty/corebots-release/releases/latest' },
+    ],
     summary:
       'A Windows launcher for ten automation bots, sold by licence key. Installs without admin rights, binds to the machine, and updates itself from GitHub — the boring parts of shipping software to people who will never open a terminal.',
     layout: 'full',
@@ -108,7 +112,7 @@ export const projects: Project[] = [
         { label: 'Surface', value: 'Windows 10 / 11' },
         { label: 'Licensing', value: 'Cloudflare Worker, HWID-bound' },
         { label: 'Distribution', value: 'GitHub releases, auto-update' },
-        { label: 'Landing', value: 'corebots.org' },
+        { label: 'Beyond the bots', value: 'Calculator, statistics, timer, assistant' },
       ],
       result: [
         'Version 2.2 is live, the installer checksum matches, and the update path has been verified end to end from an older build.',
@@ -131,7 +135,7 @@ export const projects: Project[] = [
     client: 'Own shop',
     roles: ['Design', 'Frontend', 'Backend'],
     stack: ['React 18', 'Vite', 'Supabase', 'Vercel'],
-    live: { label: 'teaksty.store', href: 'https://teaksty.store' },
+    links: [{ label: 'teaksty.store', href: 'https://teaksty.store' }],
     summary:
       'My own shop: archive and secondhand clothing out of Germany, shipping across Europe. A catalogue with no cart — every item opens a ready-written Telegram message, because that is where the sale actually happens.',
     layout: 'offset-right',
@@ -237,7 +241,7 @@ export const projects: Project[] = [
         { label: 'Mini player', value: '380 × 132, always on top' },
       ],
       result: [
-        'Version 0.2.0 added the equaliser, sleep timer, Windows media controls, drag-and-drop import and the compact mini player.',
+        'The equaliser, sleep timer, Windows media controls, drag-and-drop import and the compact mini player all landed over successive releases; it is on 0.8.x now.',
         'The visualiser depends on the proxy sending its CORS header — a small, documented coupling I would rather write down than rediscover.',
       ],
       metrics: [
