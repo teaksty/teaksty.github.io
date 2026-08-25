@@ -137,13 +137,13 @@ export default async function CaseStudyPage({ params }: Params) {
         </div>
       </header>
 
-      {/* Hero visual — the one full-bleed element on the site.
-          A drawn schematic is cropped to a cinematic band; a real screenshot
-          keeps its own proportions so no part of the interface is cut off. */}
+      {/* Hero visual — the one full-bleed element on the site. A drawn
+          schematic is cropped to a cinematic band; a screenshot sits on a
+          stage inside a shallower frame so the whole interface stays visible. */}
       <Reveal kind="mask" className="mt-[clamp(3rem,7vw,6rem)]">
         <ProjectMedia
           visual={project.visual}
-          ratio={project.image ? `${project.image.width} / ${project.image.height}` : '21 / 9'}
+          ratio={project.image ? '2 / 1' : '21 / 9'}
           image={project.image}
           sizes="100vw"
           priority

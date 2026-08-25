@@ -24,6 +24,14 @@ export interface ProjectImage {
   width: number;
   height: number;
   alt: string;
+  /**
+   * How the shot is presented. `bleed` fills and crops the frame; `stage`
+   * places it on a surface, contained and uncropped; `browser` is a stage with
+   * an address bar, for web captures taken without one. Defaults to `bleed`.
+   */
+  frame?: 'bleed' | 'stage' | 'browser';
+  /** Shown in the address bar when `frame` is `browser`. */
+  url?: string;
 }
 
 export interface Project {
@@ -74,14 +82,14 @@ export const projects: Project[] = [
     summary:
       'A Windows launcher for ten automation bots, sold by licence key. Installs without admin rights, binds to the machine, and updates itself from GitHub — the boring parts of shipping software to people who will never open a terminal.',
     layout: 'full',
-    // Ratios follow the screenshots exactly, so nothing is cropped.
-    ratio: '1141 / 681',
+    ratio: '16 / 9',
     visual: 'launcher',
     image: {
       src: '/work/corebots-launcher.webp',
       width: 1141,
       height: 681,
       alt: 'CoreBots launcher: a grid of bot tiles, each with its run state, and a panel showing which bots are running',
+      frame: 'stage',
     },
     study: {
       intro:
@@ -114,12 +122,13 @@ export const projects: Project[] = [
         {
           caption: 'Settings — appearance, sounds, assistant, licence, updates',
           visual: 'launcher',
-          ratio: '1143 / 685',
+          ratio: '16 / 10',
           image: {
             src: '/work/corebots-settings.webp',
             width: 1143,
             height: 685,
             alt: 'CoreBots settings, five sections listed as rows: appearance, sounds, AI assistant, licence and updates',
+            frame: 'stage',
           },
         },
       ],
@@ -154,13 +163,15 @@ export const projects: Project[] = [
     summary:
       'My own shop: archive and secondhand clothing out of Germany, shipping across Europe. A catalogue with no cart — every item opens a ready-written Telegram message, because that is where the sale actually happens.',
     layout: 'offset-right',
-    ratio: '1862 / 926',
+    ratio: '5 / 4',
     visual: 'catalog',
     image: {
       src: '/work/teaksty-store-home.webp',
       width: 1862,
       height: 926,
       alt: 'teaksty.store home page: bilingual navigation, a full-bleed hero over blurred garments, and a row of shop facts',
+      frame: 'browser',
+      url: 'teaksty.store',
     },
     study: {
       intro:
@@ -219,13 +230,14 @@ export const projects: Project[] = [
     summary:
       'An Electron player that streams from YouTube and SoundCloud through a local proxy. Ten-band EQ, real crossfade, synced karaoke, and an interface that takes its colour from the cover currently playing.',
     layout: 'offset-left',
-    ratio: '1365 / 818',
+    ratio: '4 / 3',
     visual: 'player',
     image: {
       src: '/work/corecloud-player.png',
       width: 1365,
       height: 818,
       alt: 'CoreCloud player: cover art, a waveform seek bar with listener comments pinned to it, transport controls and the track queue below',
+      frame: 'stage',
     },
     study: {
       intro:
@@ -258,12 +270,13 @@ export const projects: Project[] = [
         {
           caption: 'Library — playlists, local files and generated selections',
           visual: 'player',
-          ratio: '1365 / 807',
+          ratio: '16 / 10',
           image: {
             src: '/work/corecloud-library.png',
             width: 1365,
             height: 807,
             alt: 'CoreCloud library: favourites and local files at the top, generated selections, and the playlist list down the left',
+            frame: 'stage',
           },
         },
       ],
