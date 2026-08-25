@@ -137,11 +137,13 @@ export default async function CaseStudyPage({ params }: Params) {
         </div>
       </header>
 
-      {/* Hero visual — the one full-bleed element on the site --------- */}
+      {/* Hero visual — the one full-bleed element on the site.
+          A drawn schematic is cropped to a cinematic band; a real screenshot
+          keeps its own proportions so no part of the interface is cut off. */}
       <Reveal kind="mask" className="mt-[clamp(3rem,7vw,6rem)]">
         <ProjectMedia
           visual={project.visual}
-          ratio="21 / 9"
+          ratio={project.image ? `${project.image.width} / ${project.image.height}` : '21 / 9'}
           image={project.image}
           sizes="100vw"
           priority
@@ -192,7 +194,8 @@ export default async function CaseStudyPage({ params }: Params) {
         </dl>
       </Block>
 
-      {/* Screens ------------------------------------------------------ */}
+      {/* Screens — omitted entirely when a case has none to show ------ */}
+      {study.screens.length > 0 ? (
       <section className="shell pt-[clamp(4rem,9vw,8rem)]">
         <div className="rule" />
         <h2 className="micro-label mt-6 text-muted">Screens</h2>
@@ -228,6 +231,7 @@ export default async function CaseStudyPage({ params }: Params) {
           })}
         </div>
       </section>
+      ) : null}
 
       {/* Details ------------------------------------------------------ */}
       <Block label="Details">

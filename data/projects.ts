@@ -74,8 +74,15 @@ export const projects: Project[] = [
     summary:
       'A Windows launcher for ten automation bots, sold by licence key. Installs without admin rights, binds to the machine, and updates itself from GitHub — the boring parts of shipping software to people who will never open a terminal.',
     layout: 'full',
-    ratio: '16 / 9',
+    // Ratios follow the screenshots exactly, so nothing is cropped.
+    ratio: '1141 / 681',
     visual: 'launcher',
+    image: {
+      src: '/work/corebots-launcher.webp',
+      width: 1141,
+      height: 681,
+      alt: 'CoreBots launcher: a grid of bot tiles, each with its run state, and a panel showing which bots are running',
+    },
     study: {
       intro:
         'CoreBots is a desktop launcher for ten bots that automate repetitive tasks in a GTA5RP roleplay server. It is a real product with paying users, which means most of the work is not the interface — it is distribution, licensing, updates, and the failure modes of a Windows machine you cannot see.',
@@ -104,9 +111,17 @@ export const projects: Project[] = [
         },
       ],
       screens: [
-        { caption: 'Launcher, bot tiles and licence state', visual: 'launcher', ratio: '16 / 10' },
-        { caption: 'Statistics — earnings diary, goals, achievements', visual: 'feed', ratio: '4 / 3' },
-        { caption: 'Bot window under the shared theme', visual: 'catalog', ratio: '4 / 3' },
+        {
+          caption: 'Settings — appearance, sounds, assistant, licence, updates',
+          visual: 'launcher',
+          ratio: '1143 / 685',
+          image: {
+            src: '/work/corebots-settings.webp',
+            width: 1143,
+            height: 685,
+            alt: 'CoreBots settings, five sections listed as rows: appearance, sounds, AI assistant, licence and updates',
+          },
+        },
       ],
       details: [
         { label: 'Surface', value: 'Windows 10 / 11' },
@@ -139,8 +154,14 @@ export const projects: Project[] = [
     summary:
       'My own shop: archive and secondhand clothing out of Germany, shipping across Europe. A catalogue with no cart — every item opens a ready-written Telegram message, because that is where the sale actually happens.',
     layout: 'offset-right',
-    ratio: '3 / 4',
+    ratio: '1862 / 926',
     visual: 'catalog',
+    image: {
+      src: '/work/teaksty-store-home.webp',
+      width: 1862,
+      height: 926,
+      alt: 'teaksty.store home page: bilingual navigation, a full-bleed hero over blurred garments, and a row of shop facts',
+    },
     study: {
       intro:
         'The shop had been running out of a Telegram channel. That works until someone wants to browse, or find the piece again, or share it. The site is the catalogue the channel could not be — indexable, linkable, bilingual — while the conversation stays in Telegram.',
@@ -168,10 +189,7 @@ export const projects: Project[] = [
           body: 'Vercel builds from the main branch. There is no step in between where a version can be forgotten.',
         },
       ],
-      screens: [
-        { caption: 'Catalogue with filters and sidebar', visual: 'catalog', ratio: '16 / 10' },
-        { caption: 'Product page — one Telegram action', visual: 'garment', ratio: '3 / 2' },
-      ],
+      screens: [],
       details: [
         { label: 'Live', value: 'teaksty.store' },
         { label: 'Data', value: 'Supabase, RLS + Storage' },
@@ -201,8 +219,14 @@ export const projects: Project[] = [
     summary:
       'An Electron player that streams from YouTube and SoundCloud through a local proxy. Ten-band EQ, real crossfade, synced karaoke, and an interface that takes its colour from the cover currently playing.',
     layout: 'offset-left',
-    ratio: '4 / 3',
+    ratio: '1365 / 818',
     visual: 'player',
+    image: {
+      src: '/work/corecloud-player.png',
+      width: 1365,
+      height: 818,
+      alt: 'CoreCloud player: cover art, a waveform seek bar with listener comments pinned to it, transport controls and the track queue below',
+    },
     study: {
       intro:
         'CoreCloud started as a rebuild of a player I liked and kept going past it. It is the project where I learned that audio software is mostly about latency and state — the visible part is a list of songs.',
@@ -231,8 +255,17 @@ export const projects: Project[] = [
         },
       ],
       screens: [
-        { caption: 'Now playing with cover-derived colour', visual: 'player', ratio: '16 / 10' },
-        { caption: 'Karaoke overlay, synced LRC', visual: 'voice', ratio: '16 / 10' },
+        {
+          caption: 'Library — playlists, local files and generated selections',
+          visual: 'player',
+          ratio: '1365 / 807',
+          image: {
+            src: '/work/corecloud-library.png',
+            width: 1365,
+            height: 807,
+            alt: 'CoreCloud library: favourites and local files at the top, generated selections, and the playlist list down the left',
+          },
+        },
       ],
       details: [
         { label: 'Surface', value: 'Windows desktop' },
