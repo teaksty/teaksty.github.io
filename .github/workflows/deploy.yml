@@ -30,6 +30,10 @@ jobs:
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
+        with:
+          # Turns Pages on through the API if it has not been enabled in
+          # Settings yet, instead of failing with "Get Pages site failed".
+          enablement: true
 
       - run: npm ci
 
