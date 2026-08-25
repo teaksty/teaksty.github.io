@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens                                                      */
+/*  Four surfaces, three text weights, one accent. Nothing else.       */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --bg: #0a0a0a;
+  --bg-raised: #101010;
+  --bg-sunken: #060606;
+  --bg-media: #131312;
+
+  --fg: #f2f2f0;
+  --fg-muted: #8c8c86;
+  --fg-faint: #55554f;
+
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+
+  /* Used sparingly: index marks, availability dot, selection, focus. */
+  --accent: #e0533b;
+
+  --font-sans: var(--font-inter), 'Neue Haas Grotesk Display', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --gutter: clamp(1.25rem, 4.5vw, 4rem);
+  --section: clamp(5.5rem, 11vw, 11rem);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #0a0a0a;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* Scrollbar kept quiet rather than hidden — hiding it costs orientation. */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border: 3px solid var(--bg);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@layer components {
+  /* Horizontal rhythm: one shell, one content column, one label grid. */
+  .shell {
+    width: 100%;
+    max-width: var(--shell-max, 1440px);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* 12 columns on desktop, 6 on tablet, 1 on phone. */
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2vw, 1.5rem);
+  }
+  @media (min-width: 1024px) {
+    .grid-12 {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+
+  .rule {
+    height: 1px;
+    width: 100%;
+    background: var(--line);
+  }
+
+  .micro-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+  }
+
+  /* Underline that draws in from the left on hover. */
+  .link-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 420ms var(--ease-out);
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Motion                                                             */
+/*  Four distinct entrances, assigned per section so the page does not  */
+/*  read as one repeated fade-up.                                      */
+/* ------------------------------------------------------------------ */
+
+[data-reveal] {
+  --reveal-delay: 0ms;
+}
+
+[data-reveal='rise'] {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 620ms linear var(--reveal-delay),
+    transform 620ms var(--ease-out) var(--reveal-delay);
+}
+
+[data-reveal='mask'] {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 780ms var(--ease-out) var(--reveal-delay);
+}
+
+[data-reveal='wipe'] {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 700ms var(--ease-out) var(--reveal-delay);
+}
+
+[data-reveal='rule'] {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 900ms var(--ease-out) var(--reveal-delay);
+}
+
+[data-reveal='fade'] {
+  opacity: 0;
+  transition: opacity 700ms linear var(--reveal-delay);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+
+/* Hero lines animate on load, not on scroll — they are already in view. */
+@keyframes line-in {
+  from {
+    transform: translate3d(0, 105%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.line-clip {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.line-inner {
+  display: block;
+  transform: translate3d(0, 105%, 0);
+  animation: line-in 900ms var(--ease-out) forwards;
+  animation-delay: var(--line-delay, 0ms);
+}
+
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.rule-draw {
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: rule-draw 1100ms var(--ease-out) forwards;
+  animation-delay: var(--rule-delay, 0ms);
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fade-in 700ms linear forwards;
+  animation-delay: var(--fade-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+  .line-inner {
+    transform: none;
+  }
+  .fade-in {
+    opacity: 1;
+  }
+  .rule-draw {
+    transform: none;
+  }
+}
