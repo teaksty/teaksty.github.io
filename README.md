@@ -18,18 +18,13 @@ The site is a static export (`output: 'export'` in `next.config.mjs`), and
 One-time setup in the repository: **Settings → Pages → Source → GitHub Actions**.
 That is all — no branch to pick, no `gh-pages` to maintain.
 
-The base path is worked out at build time, so the repo name decides the URL:
+The repository is `teaksty.github.io`, so the site is served from the root at
+**https://teaksty.github.io** with no base path.
 
-| Repo name | URL | Base path |
-| --- | --- | --- |
-| `teaksty.github.io` | `https://teaksty.github.io` | none |
-| anything else, e.g. `portfolio` | `https://teaksty.github.io/portfolio` | `/portfolio` |
-
-`actions/configure-pages` reports the right value and the workflow passes it in as
-`PAGES_BASE_PATH`. Locally the variable is unset, so `npm run dev` stays at the root.
-
-After the first deploy, point `site.url` in `data/site.ts` at the published address — it
-feeds `og:url` and the canonical tag.
+That is not hard-coded: `actions/configure-pages` reports the base path and the workflow
+passes it in as `PAGES_BASE_PATH`. Renaming the repo to anything else would move the site
+to `https://teaksty.github.io/<repo>` and the links would follow. Locally the variable is
+unset, so `npm run dev` stays at the root.
 
 ## Where the content lives
 

@@ -17,9 +17,8 @@ export const site = {
     detail: 'Telegram is the fastest way to reach me',
   },
   email: 'teaksty@gmail.com',
-  // Canonical address of THIS site — used for og:url and the sitemap.
-  // Currently points at the shop; change it once the portfolio has its own domain.
-  url: 'https://teaksty.store',
+  // Canonical address of THIS site — used for og:url and the canonical tag.
+  url: 'https://teaksty.github.io',
 
   hero: {
     /** Rendered as individually masked lines, so keep them short. */
